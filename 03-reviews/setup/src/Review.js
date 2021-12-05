@@ -6,17 +6,25 @@ const Review = () => {
   const nextPerson = () => {
     setIndex((index) => {
       let newIndex = index + 1;
-      if (newIndex > people.length - 1) newIndex = 0;
-      return newIndex;
+      return checkNumber(newIndex);
     });
   };
 
   const prevPerson = () => {
     setIndex((index) => {
       let newIndex = index - 1;
-      if (newIndex < 0) newIndex = people.length - 1;
-      return newIndex;
+      return checkNumber(newIndex);
     });
+  };
+
+  const checkNumber = (number) => {
+    if (number < 0) {
+      number = people.length - 1;
+    }
+    if (number > people.length - 1) {
+      number = 0;
+    }
+    return number;
   };
 
   /**
@@ -24,8 +32,8 @@ const Review = () => {
    */
   const randomPerson = () => {
     let randomNumber = Math.floor(Math.random() * people.length);
-    setIndex(randomNumber);
-    return randomNumber;
+    setIndex(checkNumber(randomNumber));
+    return checkNumber(randomNumber);
   };
 
   const [index, setIndex] = useState(0);
